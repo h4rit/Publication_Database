@@ -69,13 +69,67 @@ class Expressions:
                             ),
                             ["pub_info.conference"]
                         )
-    expression2 = x - y
+    expression2 = exp2_1 - exp2_2
 
     # Q3
-    # πauthor.name,author.affiliation,pub_info.conference,pub_info.year,count(author⨝(pub_info⨝(γfield_conference.conference,pub_info.year;max(pub_info.count)→count(πconference(σfield='Databases'(field_conference))⨝pub_info))))
-    # expression3 = ...
+    # πauthor.name,author.affiliation,pub_info.conference,pub_info.year,count
+    # (author⨝(
+    # pub_info⨝(
+    # γfield_conference.conference,pub_info.year;max(pub_info.count)→count(πconference(σfield='Databases'(field_conference))⨝pub_info)
+    # )
+    # ))
+    # expression3 = Projection((
+    #                             NaturalJoin(
+    #                                 Relation("author"),
+    #                                 NaturalJoin(
+    #                                     Relation("pub_info"),
+
+    #                                 )
+    #                                 )
+    #                         ), 
+    #                         [])
     
-    # expression4 = ...
+
+    # X = author ⨝ ( 
+    # σfield='Databases'(field_conference) ⨝ σyear≥2020 ∧ year≤2024(pub_info) )
+    # πaffiliation( X ) 
+ 
+    #  -
+    
+    # πaffiliation(
+    # πaffiliation( X ) ⨯ πconference(σfield='Databases'(field_conference) ) - πaffiliation,conference( X ) )
+
+    expression4_1 = NaturalJoin(
+                    Relation("author"),
+                        NaturalJoin(
+                            Selection(
+                                Relation("pub_info"),
+                                And(
+                                    GreaterEquals("pub_info.year", 2020),
+                                    LessEquals("pub_info.year", 2024)
+                                )
+                            ),
+                            Selection( 
+                                Relation("field_conference"),
+                                Equals("field_conference.field", "Databases")
+                            )
+                        )
+                    )
+    # πaffiliation( X ) ⨯ πconference(σfield='Databases'(field_conference) ) - πaffiliation,conference( X ) )
+    expression4 = Projection(expression4_1, ["author.affiliation"]) - Projection(
+                    CrossProduct(
+                        Projection (expression4_1,  ["author.affiliation"]),
+                        Projection(
+                            Selection(
+                                Relation("field_conference"),
+                                Equals('field_conference.field', "Databases")
+                            ),
+                            ['field_conference.conference']
+                        )            
+                    ) - Projection(expression4_1, ['author.affiliation','field_conference.conference']),
+                    ['author.affiliation']
+
+                )
     
     # expression5 = ...
 
@@ -102,8 +156,61 @@ class Expressions:
 # Z =πpub_info.name,author.affiliation(πpub_info.name(pub_info ⨝ X)⨝author)
 
 # πauthor.affiliation(Y ⨝(UniRank1.university_name=author.affiliation) Z)
+    X = Projection(
+            ThetaJoin(
+                Selection(
+                    Relation("field_conference"),
+                    Equals("field_conference.field", "Databases")
+                ),
+                Selection(
+                    Relation("conference_ranking"),
+                    Equals("conference_ranking.rank", "A*")
+                ),
+            Equals("conference_ranking.conf_abbr", "field_conference.conference")
+            ),
+        ["conference"]
+    )
+
+
+    UniRank1 = Rename(
+        Relation("usnews_university_rankings"), "UniRank1"
+    )
+
+    Y = Projection(
+            ThetaJoin(
+                UniRank1,
+                Selection(
+                    Relation("usnews_university_rankings"),
+                    Equals("university_name", "University of California, Irvine")
+                ),
+                LessThan("UniRank1.rank", "usnews_university_rankings.rank")
+            ),
+        ["UniRank1.university_name", "UniRank1.rank"]
+    )
+
+    YY = Projection ( Y, ['university_name'])
+
+    Z = Projection(
+            NaturalJoin(
+                Projection(
+                    NaturalJoin(Relation("pub_info"), X),
+                    ["pub_info.name"]
+                ),
+                Relation("author")
+            ),
+        ["pub_info.name", "author.affiliation"]
+    )
+
+    expression5_1 = Projection(
+        ThetaJoin(Y,Z,Equals("UniRank1.university_name", "author.affiliation")
+        ),
+        ["affiliation"]
+    ) 
+
+    expression5 = YY - RightSemiJoin(YY, expression5_1)
 
 
 sql_con = sqlite3.connect('sample220P.db')  # Ensure the uploaded database is loaded here
-result = Expressions.expression2.evaluate(sql_con=sql_con)
+result = Expressions.expression5.evaluate(sql_con=sql_con)
 print(result.rows)
+
