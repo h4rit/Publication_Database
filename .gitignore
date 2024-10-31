@@ -1,0 +1,48 @@
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment and dependency files
+env/
+venv/
+.venv/
+ENV/
+*.env
+*.venv
+
+# Jupyter Notebook extensions and settings
+.jupyter/
+.local/
+.ipython/
+
+# Hidden files
+.DS_Store
+Thumbs.db
+
+# Output files from Jupyter and IPython
+*.csv
+*.dat
+*.log
+*.out
+*.txt
+*.h5
+*.sqlite
+
+# Jupyter Notebook export files
+*.nbconvert/
+*.html
+
+# Temporary or swap files
+*.swp
+*.swo
+*.tmp
+*~
+
+# Virtual environment packages
+*.egg-info/
+.eggs/
+.eggs-info/
