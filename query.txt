@@ -1,0 +1,519 @@
+-- this is an example
+group: cs220P
+
+usnews_university_rankings = {
+university_name,alias_names,state,city,zip,institutional_control,rank,tied,acceptance_rate,tuition,enrollment
+'Princeton University',NULL,'NJ','Princeton',8544,'private',1,0,6,59710,5604
+'Massachusetts Institute of Technology','MIT','MA','Cambridge',2139,'private',2,0,4,60156,4657
+'Stanford University',NULL,'CA','Stanford',94305,'private',3,1,4,62484,8049
+'Harvard University',NULL,'MA','Cambridge',2138,'private',3,1,3,59076,7240
+'Yale University',NULL,'CT','New Haven',6520,'private',5,0,5,64700,6645
+'University of Pennsylvania','UPenn','PA','Philadelphia',19104,'private',6,0,7,66104,9760
+'Duke University',NULL,'NC','Durham',27708,'private',7,1,6,66172,6640
+'California Institute of Technology','CalTech Cal Tech','CA','Pasadena',91125,'private',7,1,3,63255,982
+'Northwestern University',NULL,'IL','Evanston',60208,'private',9,1,7,65997,8659
+'Brown University',NULL,'RI','Providence',2912,'private',9,1,5,68230,7639
+'Johns Hopkins University','JHU','MD','Baltimore',21218,'private',9,1,7,63340,6044
+'University of Chicago','UChicago','IL','Chicago',60637,'private',12,1,5,65619,7470
+'Columbia University',NULL,'NY','New York',10027,'private',12,1,4,65524,8832
+'Cornell University',NULL,'NY','Ithaca',14853,'private',12,1,7,66014,15735
+'University of California, Los Angeles','UCLA University of California Los Angeles','CA','Los Angeles',90095,'public',15,1,9,46326,32423
+'University of California, Berkeley','UC Berkeley Cal Berkeley University of California Berkeley','CA','Berkeley',94720,'public',15,1,11,48465,32831
+'Rice University',NULL,'TX','Houston',77005,'private',17,0,9,58128,4494
+'Dartmouth College',NULL,'NH','Hanover',3755,'private',18,1,6,65511,4458
+'Vanderbilt University',NULL,'TN','Nashville',37240,'private',18,1,7,63946,7151
+'University of Notre Dame','Notre Dame','IN','Notre Dame',46556,'private',20,0,13,62693,8971
+'University of Michigan--Ann Arbor','UM University of Michigan Ann Arbor','MI','Ann Arbor',48109,'public',21,0,18,57273,32695
+'University of North Carolina at Chapel Hill','UNC University of North Carolina Chapel Hill','NC','Chapel Hill',27599,'public',22,1,17,39338,20210
+'Georgetown University',NULL,'DC','Washington',20057,'private',22,1,12,65082,7900
+'University of Virginia','UVA','VA','Charlottesville',22904,'public',24,1,19,58950,17496
+'Washington University in St. Louis','WashU Washington University in St Louis Washington University in Saint Louis','MO','St. Louis',63130,'private',24,1,11,62982,8132
+'Carnegie Mellon University','CMU','PA','Pittsburgh',15213,'private',24,1,11,63829,7509
+'Emory University',NULL,'GA','Atlanta',30322,'private',24,1,11,60774,7101
+'University of Southern California','USC Southern Cal','CA','Los Angeles',90089,'private',28,1,12,68237,20699
+'University of California, San Diego','UCSD University of California San Diego','CA','La Jolla',92093,'public',28,1,24,48630,33096
+'University of Florida',NULL,'FL','Gainesville',32611,'public',28,1,23,28658,34552
+'University of California, Davis','UC Davis University of California Davis','CA','Davis',95616,'public',28,1,37,46043,31532
+'University of Texas at Austin','UT Austin University of Texas Austin','TX','Austin',78705,'public',32,0,31,41070,41309
+'University of California, Irvine','UC Irvine UCI University of California Irvine','CA','Irvine',92697,'public',33,1,21,47759,28661
+'Georgia Institute of Technology','Georgia Tech','GA','Atlanta',30332,'public',33,1,17,32876,18415
+'University of California, Santa Barbara','UCSB UC Santa Barbara University of California Santa Barbara','CA','Santa Barbara',93106,'public',35,1,26,45658,23460
+'University of Illinois Urbana-Champaign','University of Illinois Urbana Champaign','IL','Champaign',61820,'public',35,1,45,36068,35120
+'University of Wisconsin--Madison','University of Wisconsin Madison','WI','Madison',53706,'public',35,1,49,40603,37230
+'New York University','NYU','NY','New York',10012,'private',35,1,12,60438,29401
+'Boston College','BC','MA','Chestnut Hill',2467,'private',39,0,17,67680,9484
+'University of Washington',NULL,'WA','Seattle',98195,'public',40,1,48,41997,36872
+'Tufts University',NULL,'MA','Medford',2155,'private',40,1,10,67844,6815
+'Rutgers University--New Brunswick','Rutgers University Rutgers, the State University of New Jersey New Brunswick','NJ','Piscataway',8854,'public',40,1,66,36001,36344
+}
+
+conference_ranking = {
+conference_abbreviation, name, rank
+'ICCV', 'IEEE International Conference on Computer Vision', 'A*'
+    'ICDE', 'International Conference on Data Engineering', 'A*'
+    'PODS', 'ACM SIGMOD SIGACT SIGART Conference on Principles of Database Systems', 'A*'
+    'SIGMOD', 'ACM Special Interest Group on Management of Data Conference', 'A*'
+    'VLDB', 'International Conference on Very Large Databases', 'A*'
+    'CVPR', 'IEEE Conference on Computer Vision and Pattern Recognition', 'A'
+    'ECCV', 'European Conference on Computer Vision', 'A'
+    'VIS', 'IEEE Visualization IEEE', 'A'
+    'VR', 'IEEE Virtual Reality Conference', 'B'
+    'VR', 'Euro Virtual Reality Euro', 'C'
+}
+
+field_conference = {
+major, field, conference
+ 'Computer Science', 'Databases', 'SIGMOD'
+    'Computer Science', 'Databases', 'VLDB'
+    'Computer Science', 'Databases', 'ICDE'
+    'Computer Science', 'Databases', 'PODS'
+    'Computer Science', 'Visualization', 'VIS'
+    'Computer Science', 'Visualization', 'VR'
+    'Computer Science', 'Computer Vision', 'CVPR'
+    'Computer Science', 'Computer Vision', 'ECCV'
+    'Computer Science', 'Computer Vision', 'ICCV'
+}
+
+pub_info = {
+name, conference, count, year
+'Aditya G. Parameswaran', 'ICDE', 1, 2021
+'Aditya G. Parameswaran', 'SIGMOD', 2, 2020
+'Aditya G. Parameswaran', 'SIGMOD', 1, 2021
+'Aditya G. Parameswaran', 'VIS', 1, 2020
+'Aditya G. Parameswaran', 'VLDB', 1, 2020
+'Aditya G. Parameswaran', 'VLDB', 4, 2021
+'Aditya G. Parameswaran', 'VLDB', 2, 2022
+'Aggelos K. Katsaggelos', 'CVPR', 1, 2020
+'Alberto L. Sangiovanni-Vincentelli', 'CVPR', 1, 2021
+'Alexander C. Berg', 'CVPR', 1, 2021
+'Alexander C. Berg', 'CVPR', 1, 2022
+'Alexander C. Berg', 'ICCV', 1, 2021
+'Alexei A. Efros', 'CVPR', 1, 2020
+'Alexei A. Efros', 'CVPR', 1, 2021
+'Alexei A. Efros', 'CVPR', 3, 2022
+'Alexei A. Efros', 'ECCV', 5, 2020
+'Alexei A. Efros', 'ECCV', 6, 2022
+'Alexei A. Efros', 'ICCV', 1, 2021
+'Andrew Crotty', 'ICDE', 1, 2020
+'Andrew Crotty', 'ICDE', 1, 2021
+'Andrew Crotty', 'SIGMOD', 2, 2020
+'Angjoo Kanazawa', 'CVPR', 3, 2021
+'Angjoo Kanazawa', 'CVPR', 5, 2022
+'Angjoo Kanazawa', 'ECCV', 2, 2020
+'Angjoo Kanazawa', 'ECCV', 4, 2022
+'Angjoo Kanazawa', 'ICCV', 4, 2021
+'Anthony D. Joseph', 'VLDB', 1, 2020
+'Anthony D. Joseph', 'VLDB', 1, 2021
+'Benjamin Recht', 'CVPR', 1, 2022
+'Benjamin Recht', 'ICCV', 1, 2021
+'Caleb Stanford', 'PODS', 1, 2021
+'Charless C. Fowlkes', 'CVPR', 1, 2020
+'Charless C. Fowlkes', 'CVPR', 2, 2021
+'Charless C. Fowlkes', 'CVPR', 1, 2022
+'Chen Li 0001', 'SIGMOD', 1, 2020
+'Chen Li 0001', 'SIGMOD', 1, 2022
+'Chen Li 0001', 'VLDB', 2, 2020
+'Chen Li 0001', 'VLDB', 2, 2022
+'David A. Wagner 0001', 'ECCV', 1, 2022
+'Dawn Song', 'CVPR', 1, 2020
+'Dawn Song', 'CVPR', 3, 2021
+'Dawn Song', 'CVPR', 1, 2022
+'Dawn Song', 'ICCV', 1, 2021
+'Dawn Song', 'ICDE', 1, 2021
+'Dawn Song', 'SIGMOD', 1, 2020
+'Dongyu Liu', 'SIGMOD', 1, 2022
+'Dongyu Liu', 'VIS', 3, 2022
+'Faisal Nawab', 'ICDE', 3, 2021
+'Faisal Nawab', 'ICDE', 1, 2022
+'Hamed Pirsiavash', 'CVPR', 1, 2020
+'Hamed Pirsiavash', 'CVPR', 2, 2022
+'Hamed Pirsiavash', 'ECCV', 2, 2022
+'Hamed Pirsiavash', 'ICCV', 2, 2021
+'Hao Chen 0003', 'ECCV', 1, 2020
+'Hyoukjun Kwon', 'CVPR', 1, 2022
+'Ion Stoica', 'ECCV', 1, 2022
+'Ion Stoica', 'SIGMOD', 1, 2022
+'Ion Stoica', 'VLDB', 1, 2020
+'Ion Stoica', 'VLDB', 3, 2021
+'Ion Stoica', 'VLDB', 1, 2022
+'Jacob Steinhardt', 'CVPR', 2, 2021
+'Jacob Steinhardt', 'CVPR', 1, 2022
+'Jacob Steinhardt', 'ICCV', 1, 2021
+'Jason D. Hartline', 'VIS', 1, 2022
+'Jelani Nelson', 'PODS', 1, 2022
+'Jennie Rogers', 'SIGMOD', 1, 2021
+'Jennie Rogers', 'VLDB', 1, 2020
+'Jessica Hullman', 'VIS', 2, 2020
+'Jessica Hullman', 'VIS', 2, 2021
+'Jessica Hullman', 'VIS', 4, 2022
+'Jiawei Zhang 0001', 'ICDE', 1, 2021
+'Jitendra Malik', 'CVPR', 1, 2020
+'Jitendra Malik', 'CVPR', 11, 2022
+'Jitendra Malik', 'ECCV', 6, 2020
+'Jitendra Malik', 'ICCV', 4, 2021
+'John F. Canny', 'CVPR', 1, 2020
+'Joseph Gonzalez 0001', 'CVPR', 1, 2020
+'Joseph Gonzalez 0001', 'CVPR', 1, 2021
+'Joseph Gonzalez 0001', 'CVPR', 1, 2022
+'Joseph Gonzalez 0001', 'ECCV', 2, 2022
+'Joseph Gonzalez 0001', 'ICCV', 2, 2021
+'Joseph Gonzalez 0001', 'VLDB', 3, 2020
+'Joseph Gonzalez 0001', 'VLDB', 1, 2021
+'Joseph M. Hellerstein', 'SIGMOD', 1, 2020
+'Joseph M. Hellerstein', 'VIS', 1, 2022
+'Joseph M. Hellerstein', 'VLDB', 3, 2020
+'Joseph M. Hellerstein', 'VLDB', 1, 2021
+'Joseph M. Hellerstein', 'VLDB', 1, 2022
+'Junshan Zhang', 'CVPR', 1, 2021
+'Koushik Sen', 'ECCV', 1, 2022
+'Koushik Sen', 'VLDB', 1, 2020
+'Kurt Keutzer', 'CVPR', 1, 2020
+'Kurt Keutzer', 'CVPR', 3, 2021
+'Kurt Keutzer', 'ECCV', 1, 2020
+'Kurt Keutzer', 'ECCV', 3, 2022
+'Kurt Keutzer', 'ICCV', 2, 2021
+'Kwan-Liu Ma', 'VIS', 5, 2020
+'Kwan-Liu Ma', 'VIS', 4, 2021
+'Kwan-Liu Ma', 'VIS', 1, 2022
+'Laura Waller', 'CVPR', 1, 2022
+'Manling Li', 'CVPR', 1, 2022
+'Marti A. Hearst', 'VLDB', 1, 2021
+'Matei Zaharia', 'SIGMOD', 3, 2022
+'Matei Zaharia', 'VLDB', 3, 2020
+'Matei Zaharia', 'VLDB', 2, 2021
+'Matei Zaharia', 'VLDB', 2, 2022
+'Matthew Kay 0001', 'VIS', 2, 2021
+'Michael J. Carey 0001', 'ICDE', 1, 2022
+'Michael J. Carey 0001', 'SIGMOD', 1, 2022
+'Michael J. Carey 0001', 'VLDB', 3, 2020
+'Michael J. Carey 0001', 'VLDB', 1, 2021
+'Michael J. Carey 0001', 'VLDB', 2, 2022
+'Mohammad Sadoghi', 'ICDE', 1, 2021
+'Mohammad Sadoghi', 'VLDB', 1, 2020
+'Mohammad Sadoghi', 'VLDB', 1, 2021
+'Muhao Chen', 'VLDB', 1, 2020
+'Nalini Venkatasubramanian', 'VLDB', 1, 2020
+'Natacha Crooks', 'VLDB', 1, 2021
+'Natacha Crooks', 'VLDB', 2, 2022
+'Oliver Cossairt', 'CVPR', 1, 2020
+'Oliver Cossairt', 'ICCV', 1, 2021
+'Pieter Abbeel', 'CVPR', 1, 2021
+'Pieter Abbeel', 'CVPR', 1, 2022
+'Pieter Abbeel', 'ECCV', 2, 2022
+'Pieter Abbeel', 'ICCV', 1, 2021
+'Qi Alfred Chen', 'CVPR', 2, 2022
+'Qi Zhu 0002', 'CVPR', 1, 2022
+'Qi Zhu 0002', 'ICCV', 1, 2021
+'Ren Ng', 'CVPR', 1, 2020
+'Ren Ng', 'CVPR', 1, 2021
+'Ren Ng', 'CVPR', 1, 2022
+'Ren Ng', 'ECCV', 1, 2020
+'Ren Ng', 'ICCV', 2, 2021
+'Sanjit A. Seshia', 'CVPR', 1, 2020
+'Sergey Levine', 'CVPR', 1, 2020
+'Sergey Levine', 'ECCV', 1, 2020
+'Sharad Mehrotra', 'ICDE', 1, 2020
+'Sharad Mehrotra', 'SIGMOD', 1, 2021
+'Sharad Mehrotra', 'VLDB', 3, 2020
+'Sharad Mehrotra', 'VLDB', 1, 2021
+'Sharad Mehrotra', 'VLDB', 3, 2022
+'Shuang Zhao', 'CVPR', 1, 2021
+'Sitao Huang', 'VLDB', 1, 2021
+'Trevor Darrell', 'CVPR', 5, 2020
+'Trevor Darrell', 'CVPR', 5, 2021
+'Trevor Darrell', 'CVPR', 6, 2022
+'Trevor Darrell', 'ECCV', 6, 2020
+'Trevor Darrell', 'ECCV', 4, 2022
+'Trevor Darrell', 'ICCV', 7, 2021
+'Xiao Wang 0012', 'CVPR', 1, 2022
+'Xiao Wang 0012', 'SIGMOD', 1, 2021
+'Xiao Wang 0012', 'VLDB', 1, 2020
+'Xiaohui Xie', 'CVPR', 2, 2022
+'Xiaohui Xie', 'ECCV', 2, 2022
+'Xiaohui Xie', 'ICCV', 1, 2021
+'Xin Liu 0002', 'CVPR', 1, 2021
+'Yi Ma 0001', 'CVPR', 3, 2021
+'Yi Ma 0001', 'CVPR', 2, 2022
+}
+
+author = {
+name,affiliation,homepage,scholarid,turing_award,acm_fellow,region,country,begin_time,end_time
+'Aditi Majumder',"University of California, Irvine",'http://www.ics.uci.edu/~majumder','tXhqJv0AAAAJ',0,0,'america','us',2013,0
+'Aditya G. Parameswaran',"University of California, Berkeley",'https://cs.illinois.edu/directory/profile/adityagp','VeB3UbcAAAAJ',0,0,'america','us',2016,2023
+'Aditya V. Thakur',"University of California, Davis",'http://thakur.cs.ucdavis.edu','x8952qgAAAAJ',0,0,'america','us',2010,2021
+'Aggelos K. Katsaggelos',"Northwestern University",'http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/katsaggelos-aggelos.html','aucB85kAAAAJ',0,0,'america','us',2015,0
+'Alane Suhr',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/suhr.html','daslsUkAAAAJ',0,0,'america','us',2016,2022
+'Alberto L. Sangiovanni-Vincentelli',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/sangiovanni-vicentelli.html','AhgjQ2QAAAAJ',0,1,'america','us',2016,2019
+'Aleksandar Kuzmanovic',"Northwestern University",'http://www.cs.northwestern.edu/~akuzma','Q_zh52YAAAAJ',0,0,'america','us',2012,2023
+'Alexander C. Berg',"University of California, Irvine",'http://acberg.com','jjEht8wAAAAJ',0,0,'america','us',2010,2023
+'Alexander Gamero-Garrido',"University of California, Davis",'https://www.gamero-garrido.com','K9AHcLAAAAAJ',0,0,'america','us',2018,2021
+'Alexander Ihler',"University of California, Irvine",'http://www.ics.uci.edu/~ihler','ffdt7gMAAAAJ',0,0,'america','us',2002,0
+'Alexandre M. Bayen',"University of California, Berkeley",'http://www.ce.berkeley.edu/people/faculty/bayen','a5nY-pYAAAAJ',0,0,'america','us',2010,2022
+'Alexei A. Efros',"University of California, Berkeley",'http://www.eecs.berkeley.edu/~efros','d97bGd8AAAAJ',0,0,'america','us',2002,0
+'Alfred Kobsa',"University of California, Irvine",'https://www.ics.uci.edu/~kobsa','0nBysEcAAAAJ',0,0,'america','us',2007,2023
+'Ali Javey',"University of California, Berkeley",'http://nano.eecs.berkeley.edu','1gqyKqcAAAAJ',0,0,'america','us',2001,2021
+'Alok N. Choudhary',"Northwestern University",'http://www.eecs.northwestern.edu/~choudhar','q0nuNrEAAAAJ',0,1,'america','us',2007,0
+'Amanda Raybuck',"University of California, Davis",'https://cs.ucdavis.edu/people/amanda-raybuck','7wf31WYAAAAJ',0,0,'america','us',2011,2021
+'Amelia Regan',"University of California, Irvine",'http://www.faculty.uci.edu/profile.cfm?faculty_id=3266','1xfwEBAAAAAJ',0,0,'america','us',2001,2020
+'Anant Sahai',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~sahai','4gWt4fgAAAAJ',0,0,'america','us',2013,2022
+'Anca D. Dragan',"University of California, Berkeley",'http://www.eecs.berkeley.edu/~anca','UgHB5oAAAAAJ',0,0,'america','us',2016,2019
+'Andrew Crotty',"Northwestern University",'https://users.cs.northwestern.edu/~ajc4828','7rnfEFwAAAAJ',0,0,'america','us',2000,2023
+'André van der Hoek',"University of California, Irvine",'http://www.ics.uci.edu/~andre','h3L7zkoAAAAJ',0,0,'america','us',2012,0
+'Angjoo Kanazawa',"University of California, Berkeley",'http://people.eecs.berkeley.edu/~kanazawa','Ci-_QYIAAAAJ',0,0,'america','us',2009,0
+'Anne Marie Piper',"University of California, Irvine",'https://www.ics.uci.edu/~ampiper','5cS1i-UAAAAJ',0,0,'america','us',2018,2023
+'Anthony D. Joseph',"University of California, Berkeley",'https://www.eecs.berkeley.edu/Faculty/Homepages/joseph.html','xdGKgtcAAAAJ',0,0,'america','us',2012,2023
+'Aparna Chandramowlishwaran',"University of California, Irvine",'http://newport.eecs.uci.edu/~amowli','7ASJ6JoAAAAJ',0,0,'america','us',2017,2020
+'Aravindan Vijayaraghavan',"Northwestern University",'http://www.eecs.northwestern.edu/~aravindv','eR9vd3gAAAAJ',0,0,'america','us',2016,2021
+'Ardalan Amiri Sani',"University of California, Irvine",'http://www.ics.uci.edu/~ardalan','WA9DXAwAAAAJ',0,0,'america','us',2013,2021
+'Avesta Sasan',"University of California, Davis",'https://www.ece.ucdavis.edu/~avesta/index.html','BMmfOCEAAAAJ',0,0,'america','us',2006,2021
+'Avideh Zakhor',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/zakhor.html','XV8QLVQAAAAJ',0,0,'america','us',2007,2019
+'Avishay Tal',"University of California, Berkeley",'http://www.avishaytal.org','4pytJD8AAAAJ',0,0,'america','us',2008,2021
+'Bala Kameshwar Poolla',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/poolla.html','_Bjrr5AAAAAJ',0,0,'america','us',2005,2019
+'Benjamin Recht',"University of California, Berkeley",'http://www.eecs.berkeley.edu/~brecht','a_dbdxAAAAAJ',0,0,'america','us',2018,2019
+'Bernd Sturmfels',"University of California, Berkeley",'https://math.berkeley.edu/~bernd','5zTUNsQAAAAJ',0,0,'america','us',2009,2019
+'Bernhard E. Boser',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~boser','NHIpV98AAAAJ',0,0,'america','us',2004,2022
+'Bin Yu 0001',"University of California, Berkeley",'https://www.stat.berkeley.edu/~binyu/Site/Welcome.html','xT19Jc0AAAAJ',0,0,'america','us',2016,2023
+'Björn Hartmann',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~bjoern','aZMY6_UAAAAJ',0,0,'america','us',2009,2023
+'Bonnie A. Nardi',"University of California, Irvine",'http://www.artifex.org/~bonnie','hwc6A1MAAAAJ',0,0,'america','us',2003,2023
+'Borivoje Nikolic',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/nikolic.html','QEqPllIAAAAJ',0,0,'america','us',2002,2020
+'Brenna D. Argall',"Northwestern University",'http://www.eecs.northwestern.edu/~argall','nhpEPFgAAAAJ',0,0,'america','us',2016,2022
+'Brent J. Hecht',"Northwestern University",'http://www.brenthecht.com','6IinLVUAAAAJ',0,0,'america','us',2017,0
+'Bryan Pardo',"Northwestern University",'https://bryan-pardo.github.io','vxEKYqsAAAAJ',0,0,'america','us',2010,2023
+'Caleb Stanford',"University of California, Davis",'https://web.cs.ucdavis.edu/~cdstanford','VDFGNZ0AAAAJ',0,0,'america','us',2003,2022
+'Chang Ming Wu',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/wu.html','R1UPxsMAAAAJ',0,0,'america','us',2001,2022
+'Charless C. Fowlkes',"University of California, Irvine",'http://www.ics.uci.edu/~fowlkes','yLQF4mkAAAAJ',0,0,'america','us',2016,2019
+'Chen Li 0001',"University of California, Irvine",'https://chenli.ics.uci.edu','BRMbGhgAAAAJ',0,0,'america','us',2006,2019
+'Chen-Nee Chuah',"University of California, Davis",'https://www.ece.ucdavis.edu/~chuah/rubinet/people/chuah/bio.html','bZNRLNAAAAAJ',0,0,'america','us',2010,2023
+'Christopher Nitta',"University of California, Davis",'https://web.cs.ucdavis.edu/~cjnitta','vEPWWu0AAAAJ',0,0,'america','us',2005,2022
+'Christos Dimoulas',"Northwestern University",'http://users.eecs.northwestern.edu/~chrdimo','mFs4fikAAAAJ',0,0,'america','us',2018,2020
+'Cindy Rubio-González',"University of California, Davis",'http://web.cs.ucdavis.edu/~rubio','AMeXAmQAAAAJ',0,0,'america','us',2018,2021
+'Costas J. Spanos',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/spanos.html','90TaOdoAAAAJ',0,0,'america','us',2017,2022
+'Cristina V. Lopes',"University of California, Irvine",'http://www.ics.uci.edu/~lopes','FaY_RgsAAAAJ',0,0,'america','us',2018,2022
+'Dan Klein',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/klein.html','jJRiZR8AAAAJ',0,0,'america','us',2006,2023
+'Daniel A. Epstein',"University of California, Irvine",'https://www.depstein.net','2kpYWtEAAAAJ',0,0,'america','us',2010,2023
+'Daniel S. Hirschberg',"University of California, Irvine",'http://www.ics.uci.edu/~dan','6-Kbf7AAAAAJ',0,0,'america','us',2012,2021
+'Darren Gergle',"Northwestern University",'http://dgergle.soc.northwestern.edu','T4Yo9gQAAAAJ',0,0,'america','us',2005,2023
+'David A. Wagner 0001',"University of California, Berkeley",'http://www.cs.berkeley.edu/~daw','67kghxAAAAAJ',0,0,'america','us',2007,2019
+'David Bamman',"University of California, Berkeley",'http://people.ischool.berkeley.edu/~dbamman','RkA1y54AAAAJ',0,0,'america','us',2003,2020
+'David Doty',"University of California, Davis",'http://www.cs.ucdavis.edu/~doty','1ddBSr8AAAAJ',0,0,'america','us',2013,2020
+'David Eppstein',"University of California, Irvine",'https://www.ics.uci.edu/~eppstein','QSY7ufMAAAAJ',0,1,'america','us',2016,2023
+'David F. Redmiles',"University of California, Irvine",'http://www.ics.uci.edu/~redmiles','PDZvz_YAAAAJ',0,0,'america','us',2006,0
+'Dawn Song',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/song.html','84WzBlYAAAAJ',0,1,'america','us',2001,0
+'Debra J. Richardson',"University of California, Irvine",'http://www.ics.uci.edu/~djr','vL6ubpMAAAAJ',0,0,'america','us',2016,2021
+'Dipak Ghosal',"University of California, Davis",'http://faculty.engineering.ucdavis.edu/ghosal','Pjjq5SQAAAAJ',0,0,'america','us',2003,2023
+'Dongyu Liu',"University of California, Davis",'https://dongyu.tech','T7SfRpUAAAAJ',0,0,'america','us',2017,2019
+'Doug Downey',"Northwestern University",'http://www.cs.northwestern.edu/~ddowney','NpvcLukAAAAJ',0,0,'america','us',2000,2019
+'Edward A. Lee',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/lee.html','IJgXsgwAAAAJ',0,0,'america','us',2008,2020
+'Elad Alon',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/elad.html','ktlHDnQAAAAJ',0,0,'america','us',2017,2019
+'Elaheh Bozorgzadeh',"University of California, Irvine",'https://www.ics.uci.edu/~eli','6XecMQUAAAAJ',0,0,'america','us',2005,2022
+"Eleanor O'Rourke","Northwestern University",'http://www.eleanorourke.com','DRt16WsAAAAJ',0,0,'america','us',2016,2020
+'Elena Agapie',"University of California, Irvine",'https://eagapie.com','nc3IT3kAAAAJ',0,0,'america','us',2014,2019
+'Eli Yablonovitch',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/yablonovitch.html','4wqIUjMAAAAJ',0,0,'america','us',2015,2019
+'Eric A. Brewer',"University of California, Berkeley",'https://www.cs.berkeley.edu/~brewer','BbzYzsgAAAAJ',0,1,'america','us',2006,2023
+'Eric Mjolsness',"University of California, Irvine",'http://emj.ics.uci.edu','tqF2ld4AAAAJ',0,0,'america','us',2007,0
+'Eric Paulos',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/paulos.html','K__JmtcAAAAJ',0,0,'america','us',2017,2022
+'Erik B. Sudderth',"University of California, Irvine",'https://cs.brown.edu/people/sudderth','ePiPQ2cAAAAJ',0,0,'america','us',2006,2023
+'Fabián E. Bustamante',"Northwestern University",'http://www.cs.northwestern.edu/~fabianb','vg76M1oAAAAJ',0,0,'america','us',2018,2020
+'Faisal Nawab',"University of California, Irvine",'http://nawab.me','oMHn13QAAAAJ',0,0,'america','us',2014,2021
+'Fereydoun Hormozdiari',"University of California, Davis",'http://www.hormozdiarilab.org','yTTJKNQAAAAJ',0,0,'america','us',2018,2023
+'Gary M. Olson',"University of California, Irvine",'https://garymolson.com','4XyoYbAAAAAJ',0,1,'america','us',2010,2021
+'Gene Tsudik',"University of California, Irvine",'http://www.ics.uci.edu/~gts','WLvuu74AAAAJ',0,1,'america','us',2002,2023
+'George C. Necula',"University of California, Berkeley",'http://www.cs.berkeley.edu/~necula','_fiHvDAAAAAJ',0,0,'america','us',2012,2020
+'Gillian R. Hayes',"University of California, Irvine",'http://www.gillianhayes.com','5mIkNyYAAAAJ',0,0,'america','us',2010,2019
+'Gloria Mark',"University of California, Irvine",'http://www.ics.uci.edu/~gmark','aoZCW38AAAAJ',0,0,'america','us',2005,2023
+'Gokhan Memik',"Northwestern University",'http://www.ece.northwestern.edu/~memik','BUJPA5QAAAAJ',0,0,'america','us',2004,2019
+'Greg Kuperberg',"University of California, Davis",'https://www.math.ucdavis.edu/~greg','OrKdXCgAAAAJ',0,0,'america','us',2001,2020
+'Habiba Farrukh',"University of California, Irvine",'https://habiba-farrukh.github.io','oSEtOA4AAAAJ',0,0,'america','us',2018,2019
+'Hai Zhou 0001',"Northwestern University",'http://www.eecs.northwestern.edu/~haizhou','z8_x7C8AAAAJ',0,0,'america','us',2016,2022
+'Hamed Pirsiavash',"University of California, Davis",'https://web.cs.ucdavis.edu/~hpirsiav','c9XXy4MAAAAJ',0,0,'america','us',2001,2021
+'Han Liu 0001',"Northwestern University",'https://www.mccormick.northwestern.edu/research-faculty/directory/profiles/liu-han.html','XaFT1o4AAAAJ',0,0,'america','us',2001,2022
+'Hany Farid',"University of California, Berkeley",'https://www.ischool.berkeley.edu/people/hany-farid','VEdybxgAAAAJ',0,0,'america','us',2016,2021
+'Hao Chen 0003',"University of California, Davis",'http://web.cs.ucdavis.edu/~hchen','1Aa3qxIAAAAJ',0,0,'america','us',2001,2021
+'Hao-Chuan Wang',"University of California, Davis",'http://www.haochuanwang.info','2cAqDukAAAAJ',0,0,'america','us',2006,2023
+'Haoqi Zhang',"Northwestern University",'http://eecs.northwestern.edu/~hq','FaGbxW0AAAAJ',0,0,'america','us',2017,2020
+'Houman Homayoun',"University of California, Davis",'https://www.ece.ucdavis.edu/~hhomayou','wL7FTE8AAAAJ',0,0,'america','us',2008,2020
+'Hyoukjun Kwon',"University of California, Irvine",'https://hyoukjunkwon.com','Eq8jGewAAAAJ',0,0,'america','us',2018,2022
+'Ian Davidson',"University of California, Davis",'http://www.cs.ucdavis.edu/~davidson','t3TMtqEAAAAJ',0,0,'america','us',2011,2021
+'Ian G. Harris',"University of California, Irvine",'http://www.ics.uci.edu/~harris','NpcLBDsAAAAJ',0,0,'america','us',2008,2019
+'Ian Horswill',"Northwestern University",'http://www.cs.northwestern.edu/~ian','YZesz7sAAAAJ',0,0,'america','us',2007,2021
+'Iftekhar Ahmed 0001',"University of California, Irvine",'https://www.ics.uci.edu/~iftekha','_TdMD7sAAAAJ',0,0,'america','us',2009,2023
+'Ilias Tagkopoulos',"University of California, Davis",'http://faculty.engineering.ucdavis.edu/tagkopoulos','CG36zWQAAAAJ',0,0,'america','us',2017,2019
+'Ioannis Panageas',"University of California, Irvine",'https://panageas.github.io','5NiFWuwAAAAJ',0,0,'america','us',2013,2020
+'Ion Stoica',"University of California, Berkeley",'http://www.cs.berkeley.edu/~istoica','vN-is70AAAAJ',0,1,'america','us',2011,2023
+'Isaac D. Scherson',"University of California, Irvine",'http://www.ics.uci.edu/~isaac','szsAigoAAAAJ',0,0,'america','us',2002,2020
+'Isaac H. Kim',"University of California, Davis",'https://www.isaackimquantum.com','oAHO1_gAAAAJ',0,0,'america','us',2002,2019
+'Jacob Steinhardt',"University of California, Berkeley",'https://www.stat.berkeley.edu/~jsteinhardt','LKv32bgAAAAJ',0,0,'america','us',2002,0
+'James A. Jones',"University of California, Irvine",'http://jamesajones.com','3lB8Y8kAAAAJ',0,0,'america','us',2016,2021
+"James F. O'Brien","University of California, Berkeley",'http://obrien.berkeley.edu','UWZA0v4AAAAJ',0,0,'america','us',2016,2022
+'Jan M. Rabaey',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/rabaey.html','GP64q_kAAAAJ',0,0,'america','us',2001,2021
+'Jason D. Hartline',"Northwestern University",'https://sites.northwestern.edu/hartline','AdAd4QIAAAAJ',0,0,'america','us',2002,2019
+'Jason Lowe-Power',"University of California, Davis",'https://faculty.engineering.ucdavis.edu/lowepower','7m7TYQsAAAAJ',0,0,'america','us',2004,2023
+'Jasper C. H. Lee',"University of California, Davis",'https://cs.ucdavis.edu/people/jasper-lee','z0Y4snAAAAAJ',0,0,'america','us',2012,0
+'Jean C. Walrand',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/walrand.html','rPU7fz0AAAAJ',0,0,'america','us',2000,2019
+'Jeffrey Bokor',"University of California, Berkeley",'http://people.eecs.berkeley.edu/~jbokor','ylSEuoIAAAAJ',0,0,'america','us',2005,2019
+'Jelani Nelson',"University of California, Berkeley",'http://people.eecs.berkeley.edu/~minilek','W6gQqWcAAAAJ',0,0,'america','us',2002,2020
+'Jennie Rogers',"Northwestern University",'http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/duggan-jennie.html','kVUa9ZoAAAAJ',0,0,'america','us',2011,2022
+'Jennifer Listgarten',"University of California, Berkeley",'http://www.jennifer.listgarten.com','jhPhgf4AAAAJ',0,0,'america','us',2015,2022
+'Jennifer T. Chayes',"University of California, Berkeley",'http://jenniferchayes.com','YAHWbtkAAAAJ',0,0,'america','us',2009,2022
+'Jessica Hullman',"Northwestern University",'http://faculty.washington.edu/jhullman','OLa9EKsAAAAJ',0,0,'america','us',2013,2020
+'Jesus De Loera',"University of California, Davis",'https://www.math.ucdavis.edu/~deloera','1S0o7WwAAAAJ',0,0,'america','us',2003,2022
+'Jiantao Jiao',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~jiantao','aO8KpGcAAAAJ',0,0,'america','us',2005,2022
+'Jiawei Zhang 0001',"University of California, Davis",'http://jiaweizhang.net','7AkZSJsAAAAJ',0,0,'america','us',2008,0
+'Jie Gu 0001',"Northwestern University",'http://users.eecs.northwestern.edu/~jgu','HP-yzF0AAAAJ',0,0,'america','us',2002,2021
+'Jitendra Malik',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~malik','oY9R5YQAAAAJ',0,1,'america','us',2004,2019
+'John D. Owens',"University of California, Davis",'https://www.ece.ucdavis.edu/~jowens','uIpPgJEAAAAJ',0,0,'america','us',2005,2023
+'John F. Canny',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/canny.html','LAv0HTEAAAAJ',0,0,'america','us',2011,2023
+'John Kubiatowicz',"University of California, Berkeley",'http://www.cs.berkeley.edu/~kubitron','00M1AqQAAAAJ',0,0,'america','us',2016,2023
+'Jonathan Richard Shewchuk',"University of California, Berkeley",'http://www.cs.berkeley.edu/~jrs','R9ZW47sAAAAJ',0,0,'america','us',2018,2022
+'Jose M. Carmena',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/carmena.html','yTIIzd0AAAAJ',0,0,'america','us',2016,2021
+'Joseph Gonzalez 0001',"University of California, Berkeley",'http://www.cs.berkeley.edu/~jegonzal','gM2WW9UAAAAJ',0,0,'america','us',2005,2020
+'Joseph M. Hellerstein',"University of California, Berkeley",'http://citris-uc.org/person/professor-joseph-hellerstein','uFJi3IUAAAAJ',0,1,'america','us',2013,2021
+'Joshua G. Tanenbaum',"University of California, Irvine",'http://josh.thegeekmovement.com','rRJ9wTJMUB8C',0,0,'america','us',2014,2020
+'Joshua Garcia',"University of California, Irvine",'https://jgarcia.ics.uci.edu','JeZRY7cAAAAJ',0,0,'america','us',2017,2021
+'Joshua McCoy',"University of California, Davis",'https://faculty.engineering.ucdavis.edu/mccoy','pdSgBVQAAAAJ',0,0,'america','us',2016,2023
+'Josiah D. Hester',"Northwestern University",'http://josiahhester.com/cv','EMYV8cEAAAAJ',0,0,'america','us',2005,2022
+'Joël Porquet-Lupine',"University of California, Davis",'https://cs.ucdavis.edu/directory/joel-porquet-lupine','hyHs8joAAAAJ',0,0,'america','us',2006,2020
+'Judith S. Olson',"University of California, Irvine",'https://judithsolson.com','xfwOz_kAAAAJ',0,1,'america','us',2018,2020
+'Julian Panetta',"University of California, Davis",'https://julianpanetta.com','1rQ_OTEAAAAJ',0,0,'america','us',2016,2021
+'Junshan Zhang',"University of California, Davis",'https://faculty.engineering.ucdavis.edu/jzhang','UtAdFs8AAAAJ',0,0,'america','us',2010,2021
+'Kannan Ramchandran',"University of California, Berkeley",'https://www.eecs.berkeley.edu/~kannanr','DcV-5RAAAAAJ',0,0,'america','us',2005,2021
+'Katherine A. Yelick',"University of California, Berkeley",'https://www.cs.berkeley.edu/~yelick','93yNuV0AAAAJ',0,1,'america','us',2010,2023
+'Kenji Sagae',"University of California, Davis",'http://compling.ucdavis.edu/sagae','8HdRoroAAAAJ',0,0,'america','us',2016,2022
+'Kenneth D. Forbus',"Northwestern University",'http://www.cs.northwestern.edu/~forbus','IdRYT-8AAAAJ',0,1,'america','us',2002,2021
+'Kenneth Y. Goldberg',"University of California, Berkeley",'http://goldberg.berkeley.edu','8fztli4AAAAJ',0,0,'america','us',2003,2022
+'Koushik Sen',"University of California, Berkeley",'http://www.eecs.berkeley.edu/Faculty/Homepages/ksen.html','Vn3L_ioAAAAJ',0,0,'america','us',2000,2021
+'Kristian J. Hammond',"Northwestern University",'http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/hammond-kristian.html','c324JbkAAAAJ',0,0,'america','us',2007,2023
+'Kurt Keutzer',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~keutzer','IzaagZkAAAAJ',0,0,'america','us',2006,2021
+'Kwan-Liu Ma',"University of California, Davis",'http://www.cs.ucdavis.edu/~ma','LgL2HpkAAAAJ',0,1,'america','us',2018,2020
+'Kylie Peppler',"University of California, Irvine",'http://kpeppler.com','FACtCgUAAAAJ',0,0,'america','us',2001,2019
+'Laura Waller',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/waller.html','aPxDp7wAAAAJ',0,0,'america','us',2012,2022
+'Laurent El Ghaoui',"University of California, Berkeley",'http://people.eecs.berkeley.edu/~elghaoui','3XLQbL8AAAAJ',0,0,'america','us',2003,2020
+'Lawrence Birnbaum',"Northwestern University",'http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/birnbaum-larry.html','vxmUoXEAAAAJ',0,0,'america','us',2011,2022
+'Lifu Huang',"University of California, Davis",'https://cs.ucdavis.edu/people/lifu-huang','76IEGtYAAAAJ',0,0,'america','us',2002,2019
+'Luis Rademacher',"University of California, Davis",'https://www.math.ucdavis.edu/~lrademac','wNqCOAEAAAAJ',0,0,'america','us',2007,2019
+'Luke J. Lee',"University of California, Berkeley",'http://biopoets.berkeley.edu','xADN4DUAAAAJ',0,0,'america','us',2005,2022
+'Maia L. Jacobs',"Northwestern University",'http://maiajacobs.com','014yACkAAAAJ',0,0,'america','us',2015,2023
+'Maike Sonnewald',"University of California, Davis",'https://msonnewald.com','kSxRj7gAAAAJ',0,0,'america','us',2011,0
+'Manling Li',"Northwestern University",'https://limanling.github.io','6U4SXnUAAAAJ',0,0,'america','us',2013,2023
+'Marco Levorato',"University of California, Irvine",'http://www.ics.uci.edu/~mlevorat','Lf2KB6cAAAAJ',0,0,'america','us',2014,2023
+'Marti A. Hearst',"University of California, Berkeley",'http://people.ischool.berkeley.edu/~hearst','Yy6xbCYAAAAJ',0,1,'america','us',2013,2020
+'Martin J. Wainwright',"University of California, Berkeley",'https://www.eecs.berkeley.edu/~wainwrig','J5Rvh6gAAAAJ',0,0,'america','us',2001,2019
+'Matei Zaharia',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~matei','I1EvjZsAAAAJ',0,0,'america','us',2004,2021
+'Matt Bishop',"University of California, Davis",'http://nob.cs.ucdavis.edu/~bishop','2oclnIwAAAAJ',0,0,'america','us',2017,2023
+'Matthew K. Farrens',"University of California, Davis",'http://faculty.engineering.ucdavis.edu/farrens','ExEEjcQAAAAJ',0,0,'america','us',2018,2020
+'Matthew K. Franklin',"University of California, Davis",'http://www.cs.ucdavis.edu/~franklin','D6ptFeMAAAAJ',0,0,'america','us',2001,2020
+'Matthew Kay 0001',"Northwestern University",'http://www.mjskay.com','NO5adqUAAAAJ',0,0,'america','us',2011,2022
+'Meenakshisundaram Gopi',"University of California, Irvine",'http://www.ics.uci.edu/~gopi','DI8bU-0AAAAJ',0,0,'america','us',2014,2022
+'Melissa Mazmanian',"University of California, Irvine",'http://www.ics.uci.edu/~mmazmani','rmEQ_KwAAAAJ',0,0,'america','us',2016,2023
+'Michael I. Jordan',"University of California, Berkeley",'http://www.cs.berkeley.edu/~jordan','yxUduqMAAAAJ',0,1,'america','us',2002,2020
+'Michael J. Carey 0001',"University of California, Irvine",'http://www.ics.uci.edu/~mjcarey','qqiZTS8AAAAJ',0,0,'america','us',2000,2020
+'Michael Lustig',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/mlustig.html','EWY1qlkAAAAJ',0,0,'america','us',2011,2019
+'Michael Neff',"University of California, Davis",'http://www.cs.ucdavis.edu/~neff','9ENU67IAAAAJ',0,0,'america','us',2002,2023
+'Michael Rubenstein',"Northwestern University",'http://users.eecs.northwestern.edu/~mrubenst','JVNms8wAAAAJ',0,0,'america','us',2008,2023
+'Michael S. Horn',"Northwestern University",'http://tidal.northwestern.edu','nxfT-esAAAAJ',0,0,'america','us',2007,2021
+'Michael T. Goodrich',"University of California, Irvine",'https://www.ics.uci.edu/~goodrich','sSS9gSoAAAAJ',0,1,'america','us',2017,2021
+'Michel M. Maharbiz',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/maharbiz.html','DJEiH1IAAAAJ',0,0,'america','us',2001,2020
+'Mohammad Abdullah Al Faruque',"University of California, Irvine",'http://aicps.eng.uci.edu','ejWHC-cAAAAJ',0,0,'america','us',2011,2019
+'Mohammad Sadoghi',"University of California, Davis",'https://faculty.engineering.ucdavis.edu/sadoghi','Lx9fbJoAAAAJ',0,0,'america','us',2015,2021
+'Mohsen Imani',"University of California, Irvine",'http://moimani.weebly.com','9UZz_qcAAAAJ',0,0,'america','us',2011,2022
+'Muhao Chen',"University of California, Davis",'https://luka-group.github.io','k79yEZkAAAAJ',0,0,'america','us',2009,2020
+'Murat Arcak',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/arcak.html','rtmW640AAAAJ',0,0,'america','us',2000,2019
+'Nabil Alshurafa',"Northwestern University",'http://www.nalshurafa.com','8mOcZzAAAAAJ',0,0,'america','us',2008,0
+'Nalini Venkatasubramanian',"University of California, Irvine",'https://www.ics.uci.edu/~nalini','qfCah3sAAAAJ',0,0,'america','us',2004,2022
+'Natacha Crooks',"University of California, Berkeley",'https://nacrooks.github.io','Qajl4Z8AAAAJ',0,0,'america','us',2010,2023
+'Nelson L. Max',"University of California, Davis",'http://faculty.engineering.ucdavis.edu/max','XXoJ5n4AAAAJ',0,1,'america','us',2011,2021
+'Nika Haghtalab',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~nika','C6pnolkAAAAJ',0,0,'america','us',2003,2021
+'Nikil D. Dutt',"University of California, Irvine",'http://www.ics.uci.edu/~dutt','CpBXPVoAAAAJ',0,1,'america','us',2006,2021
+'Nilah Ioannidis',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/nilah.html','uNNLZxYAAAAJ',0,0,'america','us',2009,2023
+'Niloufar Salehi',"University of California, Berkeley",'http://niloufar.org','E0Zbuu8AAAAJ',0,0,'america','us',2009,2020
+'Nir Yosef',"University of California, Berkeley",'https://niryosef.wordpress.com','eQ8KEHoAAAAJ',0,0,'america','us',2002,2021
+'Oliver Cossairt',"Northwestern University",'http://compphotolab.northwestern.edu','QxxseqsAAAAJ',0,0,'america','us',2001,2022
+'Padhraic Smyth',"University of California, Irvine",'http://www.ics.uci.edu/~smyth','OsoQ-dcAAAAJ',0,1,'america','us',2018,2021
+'Patrice Koehl',"University of California, Davis",'http://www.cs.ucdavis.edu/~koehl','NRAo--UAAAAJ',0,0,'america','us',2016,2019
+'Paul Dourish',"University of California, Irvine",'http://www.dourish.com','wyCIJfQAAAAJ',0,1,'america','us',2013,2020
+'Peter A. Dinda',"Northwestern University",'http://www.cs.northwestern.edu/~pdinda','9m3beGEAAAAJ',0,0,'america','us',2011,2021
+'Peter L. Bartlett',"University of California, Berkeley",'http://www.stat.berkeley.edu/~bartlett','UPVvV6kAAAAJ',0,1,'america','us',2015,2019
+'Peter Scheuermann',"Northwestern University",'http://www.ece.northwestern.edu/~peters','nvKQ7JQAAAAJ',0,0,'america','us',2017,2023
+'Phillip Rogaway',"University of California, Davis",'http://www.cs.ucdavis.edu/~rogaway','gUEkPQEAAAAJ',0,0,'america','us',2000,2022
+'Pierre Baldi',"University of California, Irvine",'http://www.igb.uci.edu/~pfbaldi','RhFhIIgAAAAJ',0,1,'america','us',2002,2022
+'Pieter Abbeel',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~pabbeel','vtwH6GkAAAAJ',0,0,'america','us',2006,2022
+'Prabal Dutta',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~prabal','H790-zwAAAAJ',0,0,'america','us',2009,2021
+'Prasad Raghavendra',"University of California, Berkeley",'http://freevideolectures.com/Course/3567/Efficient-Algorithms-and-Intractable-Problems','t5KSayQAAAAJ',0,0,'america','us',2013,2023
+'Prasant Mohapatra',"University of California, Davis",'http://faculty.engineering.ucdavis.edu/mohapatra','Zc018qEAAAAJ',0,0,'america','us',2003,2022
+'Qi Alfred Chen',"University of California, Irvine",'https://www.ics.uci.edu/~alfchen','lcsu7m8AAAAJ',0,0,'america','us',2018,2020
+'Qi Zhu 0002',"Northwestern University",'http://eecs.northwestern.edu/~qzhu','TN09YMcAAAAJ',0,0,'america','us',2000,2021
+"Raissa M. D'Souza","University of California, Davis",'http://mae.engr.ucdavis.edu/dsouza','jM23vRsKxuIC',0,0,'america','us',2003,2019
+'Raluca A. Popa',"University of California, Berkeley",'http://www.eecs.berkeley.edu/~raluca','NvKHgzkAAAAJ',0,0,'america','us',2018,2019
+'Ramesh C. Jain',"University of California, Irvine",'https://ngs.ics.uci.edu','wOYUPpwAAAAJ',0,0,'america','us',2003,2020
+'Randall Berry',"Northwestern University",'http://www.ece.northwestern.edu/~rberry','iWq6Tn4AAAAJ',0,0,'america','us',2018,2023
+'Randy H. Katz',"University of California, Berkeley",'http://bnrg.eecs.berkeley.edu/~randy','PkfChMgAAAAJ',0,1,'america','us',2003,2023
+'Ren Ng',"University of California, Berkeley",'http://www.eecs.berkeley.edu/Faculty/Homepages/yirenng.html','6H0mhLUAAAAJ',0,0,'america','us',2017,2023
+'Richard H. Lathrop',"University of California, Irvine",'http://www.ics.uci.edu/~rickl','D9UDlHYAAAAJ',0,0,'america','us',2010,2021
+'Richard N. Taylor',"University of California, Irvine",'https://www.ics.uci.edu/~taylor','h9t7KCcAAAAJ',0,1,'america','us',2018,2023
+'Rikky Muller',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/rikky.html','4bgii4oAAAAJ',0,0,'america','us',2009,2020
+'Rina Dechter',"University of California, Irvine",'http://www.ics.uci.edu/~dechter','Uph176YAAAAJ',0,1,'america','us',2011,2019
+'Robert Bruce Findler',"Northwestern University",'https://www.eecs.northwestern.edu/~robby','eBqftc8AAAAJ',0,0,'america','us',2014,2021
+'Robert J. Full',"University of California, Berkeley",'https://ib.berkeley.edu/people/faculty/fullr','82eHqZYAAAAJ',0,0,'america','us',2014,2022
+'Ronald S. Fearing',"University of California, Berkeley",'https://robotics.eecs.berkeley.edu/~ronf','mx9gMZ4AAAAJ',0,0,'america','us',2012,2019
+'Roy Fox',"University of California, Irvine",'https://roydfox.com','FH9nKOAAAAAJ',0,0,'america','us',2008,2021
+'Russ Joseph',"Northwestern University",'http://www.ece.northwestern.edu/~rjoseph','Zu-wy4wAAAAJ',0,0,'america','us',2005,0
+'S. Shankar Sastry',"University of California, Berkeley",'http://robotics.eecs.berkeley.edu/~sastry','KgZxzjsAAAAJ',0,0,'america','us',2016,2022
+'Sam Malek',"University of California, Irvine",'http://www.ics.uci.edu/~malek','qrCVP0YAAAAJ',0,0,'america','us',2017,2021
+'Sameer Singh 0001',"University of California, Irvine",'http://sameersingh.org','2RFiH8oAAAAJ',0,0,'america','us',2000,2019
+'Samir Khuller',"Northwestern University",'https://www.samirkhuller.com','6vXTtDQAAAAJ',0,1,'america','us',2000,0
+'Samuel T. King',"University of California, Davis",'https://bob.cs.ucdavis.edu','ca7sXDUAAAAJ',0,0,'america','us',2005,2020
+'Sang Woo Jun',"University of California, Irvine",'https://www.ics.uci.edu/~swjun','l9zZMOYAAAAJ',0,0,'america','us',2007,2019
+'Sangeetha Abdu Jyothi',"University of California, Irvine",'https://www.ics.uci.edu/~sabdujyo','MFZC4EgAAAAJ',0,0,'america','us',2010,0
+'Sanjam Garg',"University of California, Berkeley",'http://www.cs.berkeley.edu/~sanjamg','mb8mQH8AAAAJ',0,0,'america','us',2002,2019
+'Sanjit A. Seshia',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~sseshia','SlZavnIAAAAJ',0,1,'america','us',2018,2020
+'Satish Rao',"University of California, Berkeley",'http://www.cs.berkeley.edu/~satishr','x_cgL6gAAAAJ',0,1,'america','us',2001,2020
+'Sayeef S. Salahuddin',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/salahuddin.html','Ay4FZFUAAAAJ',0,0,'america','us',2001,2019
+'Scott Jordan 0001',"University of California, Irvine",'http://www.ics.uci.edu/~sjordan','Y1fDlhsAAAAJ',0,0,'america','us',2009,2019
+'Scott Shenker',"University of California, Berkeley",'https://www.eecs.berkeley.edu/Faculty/Homepages/shenker.html','GUAoEcAAAAAJ',0,1,'america','us',2004,2020
+'Seda Ogrenci Memik',"Northwestern University",'http://users.eecs.northwestern.edu/~seda','dojdbWYAAAAJ',0,0,'america','us',2003,2021
+'Sergey Levine',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~svlevine','8R35rCwAAAAJ',0,0,'america','us',2003,2022
+'Seth R. Sanders',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/sanders.html','Qb7xQQ0AAAAJ',0,0,'america','us',2015,2020
+'Sharad Mehrotra',"University of California, Irvine",'https://www.ics.uci.edu/~sharad','MTZaRW4AAAAJ',0,1,'america','us',2016,2019
+'Shiqian Ma',"University of California, Davis",'https://www.math.ucdavis.edu/~sqma','kkzUrUgAAAAJ',0,0,'america','us',2007,2020
+'Shuang Zhao',"University of California, Irvine",'http://shuangz.com','cbQB0MMAAAAJ',0,0,'america','us',2002,2019
+'Shyhtsun Felix Wu',"University of California, Davis",'http://www.cs.ucdavis.edu/~wu','vth4SIcAAAAJ',0,0,'america','us',2018,2019
+'Simone Campanoni',"Northwestern University",'http://www.mccormick.northwestern.edu/research-faculty/directory/profiles/campanoni-simone.html','bY5WiJIAAAAJ',0,0,'america','us',2001,2021
+'Sitao Huang',"University of California, Irvine",'http://sitaohuang.com','KduOKeMAAAAJ',0,0,'america','us',2009,2021
+'Slobodan Mitrovic',"University of California, Davis",'https://web.cs.ucdavis.edu/~mitrovic','O62Q1t0AAAAJ',0,0,'america','us',2013,2019
+'Somayeh Sojoudi',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~sojoudi','kNH8zcgAAAAJ',0,0,'america','us',2010,2023
+'Stacy M. Branham',"University of California, Irvine",'https://stacybranham.com','AmJ8iWcAAAAJ',0,0,'america','us',2001,2019
+'Stanislaw Jarecki',"University of California, Irvine",'http://www.ics.uci.edu/~stasio','TJ-7eZwAAAAJ',0,0,'america','us',2009,2021
+'Stephan Mandt',"University of California, Irvine",'http://www.stephanmandt.com','HOrGe7wAAAAJ',0,0,'america','us',2001,0
+'Steven M. Conolly',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/sconolly.html','DVnrB-4AAAAJ',0,0,'america','us',2018,2023
+'Stuart Russell 0001',"University of California, Berkeley",'http://www.cs.berkeley.edu/~russell','KJGrjCAAAAAJ',0,1,'america','us',2018,2021
+'Sylvia Ratnasamy',"University of California, Berkeley",'http://www.eecs.berkeley.edu/~sylvia','sAdDcvQAAAAJ',0,0,'america','us',2003,2022
+'Tapti Palit',"University of California, Davis",'https://cs.ucdavis.edu/people/tapti-palit','lJqQKlQAAAAJ',0,0,'america','us',2004,2022
+'Tess Tanenbaum',"University of California, Irvine",'http://tess.thegeekmovement.com','hiCKhpkAAAAJ',0,0,'america','us',2016,0
+'Thomas Courtade',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~courtade','xRmmtzIAAAAJ',0,0,'america','us',2009,2019
+'Tony Givargis',"University of California, Irvine",'https://www.ics.uci.edu/~givargis','bt2wk9EAAAAJ',0,0,'america','us',2018,2019
+'Trevor Darrell',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~trevor','bh-uRFMAAAAJ',0,0,'america','us',2016,0
+'Tsu-Jae King Liu',"University of California, Berkeley",'https://www.eecs.berkeley.edu/~tking','lMUmE_UAAAAJ',0,0,'america','us',2000,0
+'V. S. Subrahmanian',"Northwestern University",'https://www.mccormick.northwestern.edu/research-faculty/directory/profiles/subrahmanian-vs.html','PLt9wB8AAAAJ',0,0,'america','us',2014,2020
+'Venkatesan Guruswami',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~venkatg','Es6jE1kAAAAJ',0,1,'america','us',2002,2022
+'Venkatesh Akella',"University of California, Davis",'https://www.ece.ucdavis.edu/~akella','onJXki0AAAAJ',0,0,'america','us',2016,2019
+'Vern Paxson',"University of California, Berkeley",'http://www.icir.org/vern','HvwPRJ0AAAAJ',0,1,'america','us',2012,2019
+'Vivek Subramanian',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~viveks','j-KcbbAAAAAJ',0,0,'america','us',2004,2023
+'Vladimir Filkov',"University of California, Davis",'http://www.cs.ucdavis.edu/~filkov','rzwHnAcAAAAJ',0,0,'america','us',2011,0
+'Vladimir Stojanovic',"University of California, Berkeley",'https://www2.eecs.berkeley.edu/Faculty/Homepages/vlada.html','rsGmH38AAAAJ',0,0,'america','us',2004,2020
+'Wayne B. Hayes',"University of California, Irvine",'http://www.cs.toronto.edu/~wayne','3z4VbdIAAAAJ',0,0,'america','us',2012,2020
+'Xiao Wang 0012',"Northwestern University",'https://wangxiao1254.github.io','QbWLR8QAAAAJ',0,0,'america','us',2013,2021
+'Xiaohui Xie',"University of California, Irvine",'http://www.ics.uci.edu/~xhx','1CR0meYAAAAJ',0,0,'america','us',2002,2020
+'Xin Liu 0002',"University of California, Davis",'http://www.cs.ucdavis.edu/~liu','F5I3cM4AAAAJ',0,0,'america','us',2016,2021
+'Xinyu Xing',"Northwestern University",'http://xinyuxing.org','71rdofMAAAAJ',0,0,'america','us',2003,2022
+'Yakun Sophia Shao',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~ysshao','YoSGjoUAAAAJ',0,0,'america','us',2006,2019
+'Yan Chen 0004',"Northwestern University",'http://www.cs.northwestern.edu/~ychen','98iA_ooAAAAJ',0,0,'america','us',2013,2021
+'Yanning Shen',"University of California, Irvine",'https://sites.google.com/uci.edu/yanning-shen','MfzntAIAAAAJ',0,0,'america','us',2000,2023
+'Yasser Shoukry',"University of California, Irvine",'https://rcpsl.eng.uci.edu/yshoukry','KRXEPKAAAAAJ',0,0,'america','us',2018,2023
+'Yi Ma 0001',"University of California, Berkeley",'https://people.eecs.berkeley.edu/~yima','XqLiBQMAAAAJ',0,0,'america','us',2005,2019
+'Yunan Chen',"University of California, Irvine",'http://www.ics.uci.edu/~yunanc','LGHhEQ8AAAAJ',0,0,'america','us',2017,2019
+'Zhaojun Bai',"University of California, Davis",'http://www.cs.ucdavis.edu/~bai','soiDQbQAAAAJ',0,0,'america','us',2001,2020
+'Zhaoran Wang 0001',"Northwestern University",'https://www.princeton.edu/~zhaoran','HSx0BgQAAAAJ',0,0,'america','us',2001,2023
+'Zhe Zhao 0001',"University of California, Davis",'https://cs.ucdavis.edu/people/zhe-zhao','TRZB0J4AAAAJ',0,0,'america','us',2010,2022
+'Zhou Li 0001',"University of California, Irvine",'https://faculty.sites.uci.edu/zhouli','zxJYEVwAAAAJ',0,0,'america','us',2012,2020
+'Zubair Shafiq',"University of California, Davis",'https://www.cs.ucdavis.edu/~zubair','Q3FvLzUAAAAJ',0,0,'america','us',2009,2020
+}

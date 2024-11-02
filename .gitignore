@@ -28,7 +28,6 @@ Thumbs.db
 *.dat
 *.log
 *.out
-*.txt
 *.h5
 *.sqlite
 
