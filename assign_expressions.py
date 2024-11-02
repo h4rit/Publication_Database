@@ -149,13 +149,18 @@ class Expressions:
 # πaffiliation( X ) ⨯ πconference(σfield='Databases'(field_conference) ) - πaffiliation,conference( X ) )
 
 # Q5
-# X = πfield_conference.conference(σ(conference_ranking.conference_abbreviation=field_conference.conference)(σfield='Databases'(field_conference)⨝σrank='A*'(conference_ranking)))
+# X= πfield_conference.conference(σ(conference_ranking.conference_abbreviation=field_conference.conference)(σfield='Databases'(field_conference)⨝σrank='A*'(conference_ranking)))
 
 # Y= πUniRank1.university_name,UniRank1.rank(ρUniRank1(usnews_university_rankings) ⨝ UniRank1.rank < usnews_university_rankings.rank σuniversity_name = 'UniversityofCalifornia,Irvine' (usnews_university_rankings))
 
-# Z =πpub_info.name,author.affiliation(πpub_info.name(pub_info ⨝ X)⨝author)
+# Z= πpub_info.name,author.affiliation(πpub_info.name(pub_info ⨝ X)⨝author)
 
-# πauthor.affiliation(Y ⨝(UniRank1.university_name=author.affiliation) Z)
+# exp5_1 = πauthor.affiliation(Y ⨝(UniRank1.university_name=author.affiliation) Z)
+
+# YY = πUniRank1.university_name(Y)
+
+# exp5 = YY - exp5_1
+
     X = Projection(
             ThetaJoin(
                 Selection(
@@ -206,11 +211,19 @@ class Expressions:
         ),
         ["affiliation"]
     ) 
-
-    expression5 = YY - RightSemiJoin(YY, expression5_1)
+    expression5_1 = Rename(expression5_1,"affiliation")
+    YY = Rename(YY, "affiliation")
+    # expression5 = YY - RightSemiJoin(YY, expression5_1)
+    expression5 = YY - expression5_1
 
 
 sql_con = sqlite3.connect('sample220P.db')  # Ensure the uploaded database is loaded here
+
+
+result = Expressions.YY.evaluate(sql_con=sql_con)
+print(result.rows)
+result = Expressions.expression5_1.evaluate(sql_con=sql_con)
+print(result.rows)
 result = Expressions.expression5.evaluate(sql_con=sql_con)
 print(result.rows)
 
