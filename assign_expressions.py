@@ -72,22 +72,71 @@ class Expressions:
     expression2 = exp2_1 - exp2_2
 
     # Q3
-    # πauthor.name,author.affiliation,pub_info.conference,pub_info.year,count
-    # (author⨝(
-    # pub_info⨝(
-    # γfield_conference.conference,pub_info.year;max(pub_info.count)→count(πconference(σfield='Databases'(field_conference))⨝pub_info)
-    # )
-    # ))
-    # expression3 = Projection((
-    #                             NaturalJoin(
-    #                                 Relation("author"),
-    #                                 NaturalJoin(
-    #                                     Relation("pub_info"),
+#     X = σfield='Databases'(field_conference)
 
-    #                                 )
-    #                                 )
-    #                         ), 
-    #                         [])
+# Y = X ⨝ pub_info
+# Y1 = Y
+# Y2 = ρY2(Y)
+
+# Z = πfield_conference.conference,pub_info.year,pub_info.count,pub_info.name(Y1⨯Y2) - 
+# πfield_conference.conference,pub_info.year,pub_info.count,pub_info.name(σ((field_conference.conference	=Y2.conference)∧(pub_info.year=Y2.year)∧(pub_info.count<Y2.count))(Y1⨯Y2))
+
+# W = Z ⨝ Y
+# R = πfield_conference.conference,pub_info.year,pub_info.name,author.affiliation(Z ⨝(pub_info.name=author.name) author)
+# R
+    expression3_1 = Selection(
+                      Relation("field_conference"),
+                      Equals("field_conference.field","Databases")
+                    )
+    expression3_2 = NaturalJoin(
+                      expression3_1,
+                      Relation("pub_info")
+                    )
+    expression3_Y2 = Rename(
+                      expression3_2,
+                      {
+                          "field_conference.conference": "Y2_conference", # Changed 'Y2.conference' to 'Y2_conference'
+                          "pub_info.year": "Y2_year", # Changed 'Y2.year' to 'Y2_year'
+                          "pub_info.count": "Y2_count", # Changed 'Y2.count' to 'Y2_count'
+                          "pub_info.name": "Y2_name" # Changed 'Y2.name' to 'Y2_name'
+                      }
+                    )
+    expression3_3 = Projection(
+                      Selection(
+                        expression3_2 * expression3_Y2,
+                        And(
+                          Equals("field_conference.conference", "Y2_conference"), # Changed 'Y2.conference' to 'Y2_conference'
+                          And(
+                              Equals("pub_info.year", "Y2_year"), # Changed 'Y2.year' to 'Y2_year'
+                              GreaterEquals("pub_info.count", "Y2_count") # Changed 'Y2.count' to 'Y2_count'
+                          )
+                        )
+                      ),
+                      ["field_conference.conference", "pub_info.year", "pub_info.count", "pub_info.name"]
+                    )
+    expression3_4 = Projection(
+                      Selection(
+                        expression3_2*expression3_Y2,
+                        And(
+                          Equals("field_conference.conference", "Y2_conference"),
+                          And(
+                            Equals("pub_info.year", "Y2_year"),
+                            LessThan("pub_info.count", "Y2_count")
+                          )
+                        )
+                      ),
+                    ["field_conference.conference", "pub_info.year", "pub_info.count", "pub_info.name"]
+                  )
+    expression3_Z = expression3_3-expression3_4
+
+    expression3_W = NaturalJoin(
+                      expression3_Z,
+                      expression3_2
+                    )
+    expression3 = Projection(NaturalJoin(
+                      expression3_W,
+                      Relation("author")
+                    ),["field_conference.conference","pub_info.year","pub_info.name","author.affiliation"])
     
 
     # X = author ⨝ ( 
@@ -211,8 +260,8 @@ class Expressions:
         ),
         ["affiliation"]
     ) 
-    expression5_1 = Rename(expression5_1,"affiliation")
-    YY = Rename(YY, "affiliation")
+    # expression5_1 = Rename(expression5_1, mapping={"affiliation": "affiliation"})
+    YY = Rename(YY, mapping={"university_name": "affiliation"})
     # expression5 = YY - RightSemiJoin(YY, expression5_1)
     expression5 = YY - expression5_1
 
@@ -220,10 +269,9 @@ class Expressions:
 sql_con = sqlite3.connect('sample220P.db')  # Ensure the uploaded database is loaded here
 
 
-result = Expressions.YY.evaluate(sql_con=sql_con)
+# result = Expressions.YY.evaluate(sql_con=sql_con)
+# print(result.rows)
+# result = Expressions.expression5_1.evaluate(sql_con=sql_con)
+# print(result.rows)
+result = Expressions.expression3.evaluate(sql_con=sql_con)
 print(result.rows)
-result = Expressions.expression5_1.evaluate(sql_con=sql_con)
-print(result.rows)
-result = Expressions.expression5.evaluate(sql_con=sql_con)
-print(result.rows)
-
